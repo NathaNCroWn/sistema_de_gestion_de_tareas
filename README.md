@@ -1,6 +1,7 @@
 # sistema_de_gestion_de_tareas
 
 ------------
+Link del video explicatico https://youtu.be/jB-pn_1QUOk
 
 
 ##Instrucciones de uso local
