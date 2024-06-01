@@ -28,6 +28,13 @@ export const getUsers = async (req: Request, res: Response) => {
  */
 export const postUser = async (req: Request, res: Response) => {
   try {
+    const { username } = req.body;
+    const user = await User.findOne({
+      where: { username },
+    });
+    if (username === user) {
+      return res.status(500).json({ mensaje: "usuario ya estxite" });
+    }//
     const { password } = req.body;
     const hashPassword = await encrypt(password);
     await User.create({ ...req.body, password: hashPassword });

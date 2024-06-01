@@ -3,7 +3,7 @@ import { verifyToken } from "../helpers/generateToken";
 import User from "../models/User";
 
 /**
- *Crear un tipo de dato en en la interface de Request  de express
+ *Crear un tipo de dato en en la interface de Request  de express 
  */
 declare global {
   namespace Express {

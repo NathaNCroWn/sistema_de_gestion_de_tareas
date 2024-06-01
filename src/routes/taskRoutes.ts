@@ -10,6 +10,7 @@ import {
   getTaskByUser,
 } from "../controllers/TaskControllers";
 
+
 const routerTask = Router();
 
 routerTask.get("/task", getTasks);
@@ -27,6 +28,6 @@ routerTask.post(
   postTask
 );
 routerTask.put("/task/:id",checkAuth, updateTask);
-routerTask.delete("/task/:id",checkAuth, deleteTask);
+routerTask.delete("/task/:id", deleteTask);
 
 export default routerTask;
