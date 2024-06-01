@@ -27,8 +27,14 @@ export const getTasks = async (req: Request, res: Response) => {
  */
 export const postTask = async (req: Request, res: Response) => {
   try {
-    await Task.create(req.body);
-    return res.status(201).json({ mensaje: "Tarea Creada. " });
+    const  id  = req.user.id;
+    const userId = req.body.userId;
+    if (userId === id) {
+      Task.create(req.body);
+      return res.status(201).json({ mensaje: "Tarea Creada. " });
+    }else{
+        return res.status(401).json({ mensaje: "Usuario erroneo" })
+    }
   } catch (error) {
     console.log(error);
     return res.status(400).json({ mensaje: "hubo un error" });
@@ -46,7 +52,10 @@ export const postTask = async (req: Request, res: Response) => {
 export const updateTask = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
-    const userId = await User.findByPk(req.body.userId);
+    const  iduse  = req.user.id;
+    const user = req.body.userId;
+    if(user === iduse){
+        const userId = await User.findByPk(req.body.userId);
     if (!userId) {
       return res.status(404).json({ mensaje: "Usuario no existe" });
     }
@@ -56,6 +65,9 @@ export const updateTask = async (req: Request, res: Response) => {
     }
     task.update(req.body);
     return res.status(200).json({ mensaje: "Tarea Actualizada. " });
+    }else{
+        return res.status(401).json({ mensaje: "Usuario erroneo" })
+    }
   } catch (error) {
     console.log(error);
     return res.status(500).json({ mensaje: "hubo un error" });
